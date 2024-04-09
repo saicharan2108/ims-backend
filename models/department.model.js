@@ -7,7 +7,7 @@ const departmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  labName: {
+  roomNo: {
     type: String,
     required: true
   }

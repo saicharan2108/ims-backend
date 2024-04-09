@@ -6,6 +6,9 @@ const Register = require('./models/register.model');
 const Inventory = require('./models/inventory.model');
 const Department = require('./models/department.model');
 const Issue = require('./models/issue.model');
+const DepartmentStoreInventory = require('./models/departmentstoreinventory.modal');
+const LabEquipment = require("./models/labequipment.modal");
+const CanteenInventory = require('./models/canteeninventory.modal');
 const app = express();
 const uri = "mongodb+srv://padalasaibalaji95:qdu9QyIBJ0oIC3TO@cluster0.4tczzf5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 mongoose.connect(uri)
@@ -196,11 +199,11 @@ app.delete('/api/inventory/:invoiceNo', async (req, res) => {
 
 
 // Delete a department by lab name
-app.delete('/api/departments/:labName', async (req, res) => {
-    const labName = req.params.labName;
+app.delete("/api/departments/delete/:id", async (req, res) => {
     try {
         // Find the department by lab name and delete it
-        const deletedDepartment = await Department.findOneAndDelete({ labName: labName });
+        const {id} = req.params
+        const deletedDepartment = await Department.findByIdAndDelete({ _id: id });
 
         if (!deletedDepartment) {
             return res.status(404).json({ message: 'Department not found' });
@@ -211,3 +214,145 @@ app.delete('/api/departments/:labName', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+//Edit
+app.put('/api/edit/department/store/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const newData = req.body; // Updated data sent in the request body
+        const item = await DepartmentStoreInventory.findByIdAndUpdate(id, newData, { new: true });
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+//Department Store Inventory Item Adding 
+app.post('/api/add/department/store', async (req, res) => {
+    try {
+        const item = await DepartmentStoreInventory.create(req.body);
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+//Getting
+app.get('/api/add/department/store', async (req, res) => {
+    try {
+        const item = await DepartmentStoreInventory.find({});
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+//Deleting
+app.delete('/api/delete/department/store/:id', async (req, res) => {
+    try {
+        const {id} = req.params
+        console.log(id)
+        const item = await DepartmentStoreInventory.findOneAndDelete({_id:id});
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+
+
+
+//Lab Equipment  Item Adding 
+app.post('/api/add/lab/equipment', async (req, res) => {
+    try {
+        const item = await LabEquipment.create(req.body);
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+app.put('/api/edit/lab/store/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const newData = req.body; // Updated data sent in the request body
+        const item = await LabEquipment.findByIdAndUpdate(id, newData, { new: true });
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+//Getting
+app.get('/api/add/lab/store', async (req, res) => {
+    try {
+        const item = await LabEquipment.find({});
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+//Deleting
+app.delete('/api/delete/lab/store/:id', async (req, res) => {
+    try {
+        const {id} = req.params
+        console.log(id)
+        const item = await LabEquipment.findOneAndDelete({_id:id});
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+
+
+
+//canteen  Item Adding 
+app.post('/api/add/canteen/item', async (req, res) => {
+    try {
+        const item = await CanteenInventory.create(req.body);
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+app.put('/api/edit/canteen/store/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const newData = req.body; // Updated data sent in the request body
+        const item = await CanteenInventory.findByIdAndUpdate(id, newData, { new: true });
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+//Getting
+app.get('/api/add/canteen/store', async (req, res) => {
+    try {
+        const item = await CanteenInventory.find({});
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+//Deleting
+app.delete('/api/delete/canteen/store/:id', async (req, res) => {
+    try {
+        const {id} = req.params
+        console.log(id)
+        const item = await CanteenInventory.findOneAndDelete({_id:id});
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
