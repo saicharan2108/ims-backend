@@ -11,16 +11,16 @@ const InventoryItemSchema = new mongoose.Schema({
         type: String,
     },
     purchaseDate: {
-        type: String,
+        type: Date,
     },
     quantity: {
-        type: String,
+        type: Number,
     },
     unitCost: {
-        type: String,
+        type: Number,
     },
     totalCost: {
-        type: String,
+        type: Number,
     },
     condition: {
         type: String,

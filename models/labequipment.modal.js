@@ -8,19 +8,19 @@ const labEquipmentSchema = new mongoose.Schema({
     type: String
   },
   quantity: {
-    type: String,
+    type: Number,
   },
   unitPrice: {
-    type: String,
+    type: Number,
   },
   totalCost: {
-    type: String,
+    type: Number,
   },
   invoiceNo: {
     type: String
   },
   purchaseDate: {
-    type: String
+    type: Date
   },
   warranty: {
     type: String

@@ -9,17 +9,17 @@ const canteenInventorySchema = new mongoose.Schema({
   description: String,
   itemCategory: String,
   quantity: {
-    type: String,
+    type: Number,
     required: true
   },
   unitPrice: {
-    type: String,
+    type: Number,
   },
   totalCost: {
-    type: String,
+    type: Number,
   },
   purchaseDate: {
-    type: String,
+    type: Date,
   },
   supplierName: String,
   supplierAddress: String,

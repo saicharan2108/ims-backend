@@ -10,11 +10,11 @@ const InventorySchema = new mongoose.Schema({
         required: [true, "Please enter system configuration"],
     },
     quantity: {
-        type: String,
+        type: Number,
         required: [true, "Please enter quantity"],
     },
     unitPrice: {
-        type: String,
+        type: Number,
         required: [true, "Please enter unit price"],
     },
     invoiceNo: {
@@ -22,11 +22,11 @@ const InventorySchema = new mongoose.Schema({
         required: [true, "Please enter invoice number"],
     },
     purchaseDate: {
-        type: String,
+        type: Date,
         required: [true, "Please enter purchase date"],
     },
     expiryDate: {
-        type: String,
+        type: Date,
         required: [true, "Please enter expiry date"],
     },
     supplierName: {
