@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const issueSchema = new mongoose.Schema({
-  category: {
-    type: String,
-    required: true
-  },
   itemName: {
     type: String,
     required: true
@@ -13,16 +9,16 @@ const issueSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  labName: {
+  room: {
     type: String,
     required: true
   },
-  year: {
+  quantity: {
     type: Number,
     required: true
   },
-  monthName: {
-    type: String,
+  date: {
+    type: Date,
     required: true
   }
 });

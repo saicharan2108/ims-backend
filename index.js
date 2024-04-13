@@ -356,3 +356,185 @@ app.delete('/api/delete/canteen/store/:id', async (req, res) => {
     }
 });
 
+
+//Updating Count 
+app.put('/api/update/department/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { quantity } = req.body;
+
+        // Find the item by its ID
+        const item = await DepartmentStoreInventory.findById(id);
+
+        if (!item) {
+            return res.status(404).json({ message: "Item not found" });
+        }
+
+        // Update the quantity of the item
+        item.quantity = quantity;
+        await item.save();
+
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+app.put('/api/update/canteen/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { quantity } = req.body;
+
+        // Find the item by its ID
+        const item = await CanteenInventory.findById(id);
+
+        if (!item) {
+            return res.status(404).json({ message: "Item not found" });
+        }
+
+        // Update the quantity of the item
+        item.quantity = quantity;
+        await item.save();
+
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+app.put('/api/update/lab/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { quantity } = req.body;
+
+        // Find the item by its ID
+        const item = await LabInventory.findById(id);
+
+        if (!item) {
+            return res.status(404).json({ message: "Item not found" });
+        }
+
+        // Update the quantity of the item
+        item.quantity = quantity;
+        await item.save();
+
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+app.post('/api/issue/store', async (req, res) => {
+    try {
+        const item = await Issue.create(req.body);
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+app.get('/api/issue/store', async (req, res) => {
+    try {
+        const item = await Issue.find({});
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+app.get('/api/add/department/fetch/store/:year', async (req, res) => {
+    try {
+      const { year } = req.params;
+      const startDate = new Date(`${year}-01-01`);
+      const endDate = new Date(`${year}-12-31`);
+      const filteredData = await DepartmentStoreInventory.find({
+        purchaseDate: { $gte: startDate, $lte: endDate }
+      });
+      res.json(filteredData);
+      console.log(filteredData, "triggered");
+    } catch (error) {
+      console.error('Error fetching department store data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  app.get('/api/add/lab/fetch/store/:year', async (req, res) => {
+    try {
+      const { year } = req.params;
+      const startDate = new Date(`${year}-01-01`);
+      const endDate = new Date(`${year}-12-31`);
+      const filteredData = await LabEquipment.find({
+        purchaseDate: { $gte: startDate, $lte: endDate }
+      });
+      res.json(filteredData);
+    } catch (error) {
+      console.error('Error fetching lab equipment data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  app.get('/api/add/canteen/fetch/store/:year', async (req, res) => {
+    try {
+      const { year } = req.params;
+      const startDate = new Date(`${year}-01-01`);
+      const endDate = new Date(`${year}-12-31`);
+      const filteredData = await CanteenInventory.find({
+        purchaseDate: { $gte: startDate, $lte: endDate }
+      });
+      res.json(filteredData);
+    } catch (error) {
+      console.error('Error fetching canteen inventory data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+
+  // Department Store monthly data
+app.get('/api/add/department/fetch/store/:year/:month', async (req, res) => {
+    try {
+      const { year, month } = req.params;
+      const startDate = new Date(`${year}-${month}-01`);
+      const endDate = new Date(`${year}-${month}-31`);
+      const filteredData = await DepartmentStoreInventory.find({
+        purchaseDate: { $gte: startDate, $lte: endDate }
+      });
+      res.json(filteredData);
+    } catch (error) {
+      console.error('Error fetching department store data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  // Lab Equipment monthly data
+  app.get('/api/add/lab/fetch/store/:year/:month', async (req, res) => {
+    try {
+      const { year, month } = req.params;
+      const startDate = new Date(`${year}-${month}-01`);
+      const endDate = new Date(`${year}-${month}-31`);
+      const filteredData = await LabEquipment.find({
+        purchaseDate: { $gte: startDate, $lte: endDate }
+      });
+      res.json(filteredData);
+    } catch (error) {
+      console.error('Error fetching lab equipment data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  // Canteen Inventory monthly data
+  app.get('/api/add/canteen/fetch/store/:year/:month', async (req, res) => {
+    try {
+      const { year, month } = req.params;
+      const startDate = new Date(`${year}-${month}-01`);
+      const endDate = new Date(`${year}-${month}-31`);
+      const filteredData = await CanteenInventory.find({
+        purchaseDate: { $gte: startDate, $lte: endDate }
+      });
+      res.json(filteredData);
+    } catch (error) {
+      console.error('Error fetching canteen inventory data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  

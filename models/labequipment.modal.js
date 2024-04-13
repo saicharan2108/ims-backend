@@ -28,6 +28,15 @@ const labEquipmentSchema = new mongoose.Schema({
   supplierAddress: {
     type: String
   },
+  condition:{
+    type: String
+  },
+  itemType:{
+    type:String
+  },
+  labName:{
+    type:String
+  },
   supplierAddress: {
     type: String
   },
