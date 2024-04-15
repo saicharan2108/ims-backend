@@ -150,14 +150,14 @@ app.get('/api/departments', async (req, res) => {
 });
 
 // Get all issued items
-app.get('/api/issues', async (req, res) => {
-    try {
-        const issuedItems = await Issue.find();
-        res.status(200).json(issuedItems);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// app.get('/api/issues', async (req, res) => {
+//     try {
+//         const issuedItems = await Issue.find({});
+//         res.status(200).json(issuedItems);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// });
 
 
 
