@@ -99,14 +99,14 @@ app.post('/api/add/department', async (req, res) => {
 
 
 //Create an issue 
-app.post('/api/issue', async (req, res) => {
-    try {
-        const issueItem = await Issue.create(req.body);
-        res.status(201).json(issueItem);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
+// app.post('/api/issue', async (req, res) => {
+//     try {
+//         const issueItem = await Issue.create(req.body);
+//         res.status(201).json(issueItem);
+//     } catch (error) {
+//         res.status(400).json({ message: error.message });
+//     }
+// });
 
 
 // Update an inventory item based on the invoice number
