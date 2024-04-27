@@ -12,6 +12,9 @@ const canteenInventorySchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  unitIn: {
+    type: String,
+  },
   unitPrice: {
     type: Number,
   },

@@ -3,27 +3,52 @@ const mongoose = require('mongoose');
 const issueSchema = new mongoose.Schema({
   itemName: {
     type: String,
-    required: true
   },
   departmentName: {
     type: String,
-    required: true
   },
   room: {
     type: String,
-    required: true
+  },
+  unitIn: {
+    type: String,
   },
   quantity: {
     type: Number,
-    required: true
   },
-   updatedQuantity: {
+  updatedQuantity: {
     type: Number,
-    required: true
   },
   date: {
     type: Date,
-    required: true
+  },
+  itemCategory: {
+    type: String,
+  },
+  purchaseDate: {
+    type: Date,
+  },
+  unitCost: {
+    type: Number,
+  },
+  totalCost: {
+    type: Number,
+  },
+  condition: {
+    type: String,
+  },
+  warranty: {
+    type: String,
+    default: '' // Assuming warranty can be empty
+  },
+  supplierName: {
+    type: String,
+  },
+  supplierAddress: {
+    type: String,
+  },
+  supplierContact: {
+    type: String,
   }
 });
 

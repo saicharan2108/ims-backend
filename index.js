@@ -538,3 +538,30 @@ app.get('/api/add/department/fetch/store/:year/:month', async (req, res) => {
     }
   });
   
+
+
+  app.get('/aggregate/dept', async (req, res) => {
+    try {
+      const result = await CanteenInventory.aggregate([
+        {
+          $lookup: {
+            from: 'Issue', // Name of the second collection
+            localField: '_id',
+            foreignField: 'itemName',
+            as: 'issuedData'
+          }
+        }
+      ]);
+  
+      if (!result) {
+        return res.status(404).json({ error: 'No matching data found.' });
+      }
+      console.log(result)
+  
+      res.json(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error.' });
+    }
+  });
+  
